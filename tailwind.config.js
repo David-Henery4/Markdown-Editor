@@ -8,6 +8,7 @@ module.exports = {
   theme: {
     screens: {
       smTablet: "37.5em", // 600px
+      tablet: "47.5em", // 760px
     },
     colors: {
       veryDarkBlack: "#151619",
@@ -34,8 +35,12 @@ module.exports = {
       },
       gridTemplateColumns: {
         nav: "auto 1fr auto",
+        markdownPreviewContainer: "50% 50%",
+      },
+      gridTemplateRows: {
+        mainInitialRows: "auto 1fr",
       },
     },
   },
-  plugins: [],
+  plugins: [require("@tailwindcss/typography")],
 };
