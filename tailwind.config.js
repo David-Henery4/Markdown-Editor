@@ -9,6 +9,7 @@ module.exports = {
     screens: {
       smTablet: "37.5em", // 600px
       tablet: "47.5em", // 760px
+      lgTablet: "54.25em", // 868px
     },
     colors: {
       veryDarkBlack: "#151619",

@@ -2,7 +2,7 @@ import HeadingPrimary from "./HeadingPrimary";
 import HeadingSecondary from "./HeadingSecondary";
 import HeadingThree from "./HeadingThree";
 import HeadingFour from "./HeadingFour";
-import HeadingFive from "./headingFive";
+import HeadingFive from "./HeadingFive";
 import HeadingSix from "./HeadingSix";
 
 export {

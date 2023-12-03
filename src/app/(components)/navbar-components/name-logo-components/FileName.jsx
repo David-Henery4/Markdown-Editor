@@ -1,9 +1,9 @@
-import { DocumentIcon } from "../../../../public/assets";
-import { AppBody, AppHeadingMedium } from "../shared";
+import { DocumentIcon } from "../../../../../public/assets";
+import { AppBody, AppHeadingMedium } from "../../shared";
 
 const FileName = () => {
   return (
-    <div className="flex justify-start items-center gap-4 pl-6 pr-2 text-white">
+    <div className="flex justify-start items-center gap-4">
       <DocumentIcon />
       <div className="flex-1">
         <div className="hidden text-darkGrey smTablet:block">

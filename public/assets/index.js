@@ -4,6 +4,7 @@ import DeleteIcon from "./icon-delete.svg"
 import SaveIcon from "./icon-save.svg"
 import HidePreviewIcon from "./icon-hide-preview.svg";
 import ShowPreviewIcon from "./icon-show-preview.svg";
+import LogoIcon from "./logo.svg"
 
 export {
   MenuIcon,
@@ -12,4 +13,5 @@ export {
   SaveIcon,
   HidePreviewIcon,
   ShowPreviewIcon,
+  LogoIcon,
 }

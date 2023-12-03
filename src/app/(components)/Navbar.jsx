@@ -1,11 +1,11 @@
-import { SaveBtn, BurgerMenu, DeleteBtn, FileName } from "./navbar-components";
+import { SaveBtn, BurgerMenu, DeleteBtn, FileNameAndLogo } from "./navbar-components";
 
 const Navbar = () => {
   return (
     <nav className="w-full bg-lightBlack grid grid-cols-nav">
       <BurgerMenu />
 
-      <FileName />
+      <FileNameAndLogo />
 
       <div className="flex justify-center items-center p-2 gap-6 smTablet:p-4">
         <DeleteBtn />

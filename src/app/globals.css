@@ -8,6 +8,10 @@ input:-webkit-autofill:focus {
   transition: background-color 600000s 0s, color 600000s 0s;
 }
 
+#block-q-para p{
+  font-weight: bold;
+}
+
 /* h1{
   color: red;
 } */

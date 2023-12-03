@@ -3,6 +3,21 @@ import ShowHidePreview from "./components/ShowHidePreview";
 import MarkdownComponent from "react-markdown";
 import remarkGfm from "remark-gfm";
 import rehypeRaw from "rehype-raw";
+import {
+  HeadingPrimary,
+  HeadingSecondary,
+  HeadingThree,
+  HeadingFour,
+  HeadingFive,
+  HeadingSix,
+} from "../shared/previewHeadings";
+import {
+  MarkdownPreviewParagraphBold,
+  PreviewParagraph,
+  PreviewParagraphBold,
+  PreviewListItem,
+  PreviewBlockquote,
+} from "../shared/previewParagraphs";
 
 // import tempData from "../../../../data.json"
 
@@ -27,10 +42,23 @@ const Preview = ({
         />
       </div>
       {/* Can make content server component by passing in as children (But is there any point/benefit) */}
-      <div className="flex-1 w-full max-w-[672px] mx-auto p-4 prose tablet:prose-xl">
+      {/* Was using (large was removed): prose tablet:prose-xl */}
+      <div className="flex-1 w-full max-w-[672px] mx-auto p-4 text-darkGrey prose">
         <MarkdownComponent
           rehypePlugins={[rehypeRaw]}
           remarkPlugins={[remarkGfm]}
+          components={{
+            h1: HeadingPrimary,
+            h2: HeadingSecondary,
+            h3: HeadingThree,
+            h4: HeadingFour,
+            h5: HeadingFive,
+            h6: HeadingSix,
+            p: PreviewParagraph,
+            li: PreviewListItem,
+            blockquote: PreviewBlockquote,
+            strong: PreviewParagraphBold,
+          }}
         >
           {currentMarkdownContent}
         </MarkdownComponent>
