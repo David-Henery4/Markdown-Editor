@@ -1,10 +1,18 @@
-import { Navbar, MarkdownAndPreviewContainer } from "./(components)";
+"use client";
+import { Navbar, MarkdownAndPreviewContainer, Sidebar } from "./(components)";
+import { AppProvider } from "./context/Context";
+
 
 export default function Home() {
   return (
-    <main className="min-h-[100svh] w-full grid grid-rows-mainInitialRows">
-      <Navbar/>
-      <MarkdownAndPreviewContainer/>
-    </main>
+    <AppProvider>
+      <main className="min-h-[100svh] w-full flex justify-start overflow-hidden">
+        <Sidebar />
+        <section className="grid grid-rows-mainInitialRows min-w-full">
+          <Navbar />
+          <MarkdownAndPreviewContainer />
+        </section>
+      </main>
+    </AppProvider>
   );
 }
