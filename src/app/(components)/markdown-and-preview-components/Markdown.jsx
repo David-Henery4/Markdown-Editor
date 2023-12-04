@@ -26,7 +26,7 @@ const Markdown = ({
       <textarea
         name="markdown-text"
         id="markdown-text"
-        className="resize-none flex-1 w-full p-4 outline-none text-[14px] leading-[24px] text-lighterBlack font-robotoMono max-w-[672px] mx-auto"
+        className="resize-none flex-1 w-full p-4 outline-none text-[14px] leading-[24px] text-lighterBlack font-robotoMono max-w-[672px] mx-auto dark:bg-veryDarkBlack"
         value={currentMarkdownContent}
         onChange={(e) => setCurrentMarkdownContent(e.target.value)}
       ></textarea>

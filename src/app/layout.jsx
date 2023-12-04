@@ -9,7 +9,7 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en" className={`${roboto.variable} ${robotoSlab.variable} ${robotoMono.variable}`}>
-      <body className='font-roboto bg-white'>{children}</body>
+      <body className='font-roboto'>{children}</body>
     </html>
   )
 }
