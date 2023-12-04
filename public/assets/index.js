@@ -6,6 +6,8 @@ import CloseIcon from "./icon-close.svg"
 import HidePreviewIcon from "./icon-hide-preview.svg";
 import ShowPreviewIcon from "./icon-show-preview.svg";
 import LogoIcon from "./logo.svg"
+import DarkModeIcon from "./icon-dark-mode.svg"
+import LightModeIcon from "./icon-light-mode.svg"
 
 export {
   MenuIcon,
@@ -16,4 +18,6 @@ export {
   ShowPreviewIcon,
   LogoIcon,
   CloseIcon,
+  DarkModeIcon,
+  LightModeIcon,
 }
