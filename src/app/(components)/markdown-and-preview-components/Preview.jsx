@@ -17,6 +17,9 @@ import {
   PreviewParagraphBold,
   PreviewListItem,
   PreviewBlockquote,
+  PreviewLink,
+  PreviewCode,
+  PreviewPre,
 } from "../shared/previewParagraphs";
 
 // import tempData from "../../../../data.json"
@@ -34,7 +37,7 @@ const Preview = ({
           : "hidden col-start-2 col-end-3 tablet:block"
       }`}
     >
-      <div className="w-full p-4 flex justify-between items-center text-darkGrey bg-whiteShade">
+      <div className="w-full p-4 flex justify-between items-center text-darkGrey bg-whiteShade dark:bg-darkBlack dark:text-lightGrey">
         <AppHeadingSmall>PREVIEW</AppHeadingSmall>
         <ShowHidePreview
           isPreviewActive={isPreviewActive}
@@ -43,7 +46,7 @@ const Preview = ({
       </div>
       {/* Can make content server component by passing in as children (But is there any point/benefit) */}
       {/* Was using (large was removed): prose tablet:prose-xl */}
-      <div className="flex-1 w-full max-w-[672px] mx-auto p-4 text-darkGrey prose">
+      <div className="flex-1 w-full max-w-[672px] mx-auto p-4 text-darkGrey dark:text-lightGrey prose">
         <MarkdownComponent
           rehypePlugins={[rehypeRaw]}
           remarkPlugins={[remarkGfm]}
@@ -58,6 +61,9 @@ const Preview = ({
             li: PreviewListItem,
             blockquote: PreviewBlockquote,
             strong: PreviewParagraphBold,
+            a: PreviewLink,
+            code: PreviewCode,
+            pre:PreviewPre,
           }}
         >
           {currentMarkdownContent}
