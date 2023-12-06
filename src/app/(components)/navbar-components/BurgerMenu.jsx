@@ -1,5 +1,7 @@
+"use client"
 import { MenuIcon, CloseIcon } from "../../../../public/assets";
 import useGlobalContext from "@/app/context/useGlobalContext";
+
 
 const BurgerMenu = () => {
   const { isSidebarOpen, setIsSidebarOpen } = useGlobalContext();

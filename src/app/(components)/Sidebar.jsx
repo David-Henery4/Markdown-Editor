@@ -1,10 +1,10 @@
-import { AppHeadingSmall, AppHeadingMedium, AppBody } from "./shared";
-import tempData from "../../../data.json";
-import { DocumentIcon, LogoIcon } from "../../../public/assets";
+"use client"
+import { AppHeadingSmall } from "./shared";
+import { LogoIcon } from "../../../public/assets";
 import useGlobalContext from "@/app/context/useGlobalContext";
-import { ThemeToggle } from "./sidebar-components";
+import { ThemeToggle, MarkDownFileList, AddNewMarkdownBtn } from "./sidebar-components";
 
-const Sidebar = () => {
+const Sidebar = ({children}) => {
   const { isSidebarOpen } = useGlobalContext();
   //
   return (
@@ -18,33 +18,7 @@ const Sidebar = () => {
           isSidebarOpen ? "translate-x-0" : "translate-x-[-250px]"
         }`}
       >
-        <div className="w-full">
-          <div className="lgTablet:hidden">
-            <LogoIcon />
-          </div>
-          <div className="mt-7">
-            <AppHeadingSmall>MY DOCUMENTS</AppHeadingSmall>
-          </div>
-          <button className="w-full px-3 py-3 mt-7 rounded-[4px] bg-orange text-[15px] active:bg-lightOrange">
-            + New Document
-          </button>
-          <ul className="mt-6 flex flex-col justify-start items-start gap-6">
-            {/* Might be able to make re-usable with "FileName" */}
-            {tempData.map((item, i) => {
-              return (
-                <div key={i} className="flex justify-start items-center gap-4">
-                  <DocumentIcon />
-                  <div className="flex-1">
-                    <div className="hidden text-darkGrey smTablet:block">
-                      <AppBody>{item.createdAt}</AppBody>
-                    </div>
-                    <AppHeadingMedium>{item.name}</AppHeadingMedium>
-                  </div>
-                </div>
-              );
-            })}
-          </ul>
-        </div>
+        {children}
         <ThemeToggle />
       </div>
     </aside>
