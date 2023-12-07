@@ -3,8 +3,8 @@ import { useState } from "react"
 import { Markdown, Preview } from "./markdown-and-preview-components"
 import tempData from "../../../data.json";
 
-const MarkdownAndPreviewContainer = () => {
-  const [isPreviewActive, setIsPreviewActive] = useState(false)
+const MarkdownAndPreviewContainer = ({ allCurrentMarkdowns }) => {
+  const [isPreviewActive, setIsPreviewActive] = useState(false);
   const [currentMarkdownContent, setCurrentMarkdownContent] = useState(
     tempData[1].content
   );
@@ -27,6 +27,6 @@ const MarkdownAndPreviewContainer = () => {
       />
     </section>
   );
-}
+};
 
 export default MarkdownAndPreviewContainer

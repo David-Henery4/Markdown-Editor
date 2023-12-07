@@ -2,7 +2,7 @@ import { LogoIcon } from "../../../../public/assets";
 import { AppHeadingSmall } from "../shared";
 import { AddNewMarkdownBtn, MarkDownFileList } from ".";
 
-const SidebarContent = () => {
+const SidebarContent = ({ allCurrentMarkdowns }) => {
   return (
     <div className="w-full">
       <div className="lgTablet:hidden">
@@ -12,9 +12,9 @@ const SidebarContent = () => {
         <AppHeadingSmall>MY DOCUMENTS</AppHeadingSmall>
       </div>
       <AddNewMarkdownBtn />
-      <MarkDownFileList />
+      <MarkDownFileList allCurrentMarkdowns={allCurrentMarkdowns} />
     </div>
   );
-}
+};
 
 export default SidebarContent

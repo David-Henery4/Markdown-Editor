@@ -8,7 +8,7 @@ const getAllMarkdowns = async () => {
       }
     });
     const data =  res.json()
-    console.log(data)
+    // console.log(data)
     return data
   } catch (error) {
     console.log(error)
