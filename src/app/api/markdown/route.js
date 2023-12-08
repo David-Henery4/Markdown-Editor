@@ -21,3 +21,19 @@ export async function GET() {
     );
   }
 }
+
+export async function POST (req) {
+  try {
+    console.log("request data: ",req)
+    const body = await req.json()
+    console.log("body data: ",body)
+    const newMarkdownData = body.markdownData;
+    console.log("new markdown data: ",newMarkdownData)
+    //
+    await markdownList.create(newMarkdownData)
+    //
+    return NextResponse.json({message: "Markdown created"}, {status: 201})
+  } catch (error) {
+    return NextResponse.json({message: "Markdown Creation Failed"}, {status: 500})
+  }
+}
