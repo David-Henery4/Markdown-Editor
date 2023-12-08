@@ -1,5 +1,6 @@
 import { AppHeadingSmall } from "../shared";
 import ShowHidePreview from "./components/ShowHidePreview";
+import useGlobalContext from "@/app/context/useGlobalContext";
 
 const Markdown = ({
   isPreviewActive,
@@ -7,6 +8,8 @@ const Markdown = ({
   currentMarkdownContent,
   setCurrentMarkdownContent,
 }) => {
+  const { activeMdData, setActiveMdData } = useGlobalContext();
+  //
   return (
     <div
       className={`h-full flex flex-col col-start-1 col-end-3 tablet:border-r tablet:border-r-lighterGrey dark:tablet:border-r-veryDarkGrey tablet:col-start-1 tablet:col-end-2  ${
@@ -27,8 +30,10 @@ const Markdown = ({
         name="markdown-text"
         id="markdown-text"
         className="resize-none flex-1 w-full p-4 outline-none text-[14px] leading-[24px] text-lighterBlack font-robotoMono max-w-[672px] mx-auto dark:bg-veryDarkBlack dark:text-lightGrey"
-        value={currentMarkdownContent}
-        onChange={(e) => setCurrentMarkdownContent(e.target.value)}
+        value={activeMdData.content}
+        onChange={(e) => setActiveMdData((oldValues) => {
+          return {...oldValues, content: e.target.value}
+        })}
       ></textarea>
     </div>
   );

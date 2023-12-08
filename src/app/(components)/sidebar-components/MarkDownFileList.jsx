@@ -21,9 +21,9 @@ const MarkDownFileList = ({ allCurrentMarkdowns }) => {
   return (
     <ul className="w-full mt-6 flex flex-col justify-start items-start gap-6">
       {/* Might be able to make re-usable with "FileName" */}
-      {allCurrentMarkdowns.map((item, i) => {
+      {allCurrentMarkdowns.map((item, index) => {
         // console.log("item", item)
-        return <MarkdownFileBox key={i} {...item} />;
+        return <MarkdownFileBox key={index} {...item} index={index} />;
       })}
     </ul>
   );

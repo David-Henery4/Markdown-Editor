@@ -21,6 +21,7 @@ import {
   PreviewCode,
   PreviewPre,
 } from "../shared/previewParagraphs";
+import useGlobalContext from "@/app/context/useGlobalContext";
 
 // import tempData from "../../../../data.json"
 
@@ -29,6 +30,8 @@ const Preview = ({
   setIsPreviewActive,
   currentMarkdownContent,
 }) => {
+  const { activeMdData, setActiveMdData } = useGlobalContext();
+  //
   return (
     <div
       className={` h-full flex flex-col ${
@@ -66,7 +69,7 @@ const Preview = ({
             pre:PreviewPre,
           }}
         >
-          {currentMarkdownContent}
+          {activeMdData?.content}
         </MarkdownComponent>
       </div>
     </div>
