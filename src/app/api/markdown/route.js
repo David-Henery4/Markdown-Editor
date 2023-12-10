@@ -5,7 +5,6 @@ export async function GET() {
   try {
     console.log("called")
     const allMarkdowns = await markdownList.find({});
-    // console.log(allMarkdowns)
     //
     return NextResponse.json(
       { message: "Success", data: allMarkdowns },
@@ -24,11 +23,8 @@ export async function GET() {
 
 export async function POST (req) {
   try {
-    console.log("request data: ",req)
     const body = await req.json()
-    console.log("body data: ",body)
     const newMarkdownData = body.markdownData;
-    console.log("new markdown data: ",newMarkdownData)
     //
     await markdownList.create(newMarkdownData)
     //

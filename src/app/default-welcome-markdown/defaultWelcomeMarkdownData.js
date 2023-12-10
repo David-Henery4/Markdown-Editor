@@ -1,8 +1,8 @@
 
 // might chnage id & userID
 const defaultWelcomeMarkdownData = {
-  id: "100000000",
-  userId: "100000000",
+  id: "default-markdown",
+  userId: "all",
   createdAt: "04-01-2022",
   name: "welcome-default.md",
   content:
