@@ -1,18 +1,11 @@
 "use client"
 import { useEffect, useState } from "react"
 import { Markdown, Preview } from "./markdown-and-preview-components"
-// import tempData from "../../../data.json";
 import useGlobalContext from "../context/useGlobalContext";
 
 const MarkdownAndPreviewContainer = ({ allCurrentMarkdowns }) => {
   const { activeMd, setActiveMdData } = useGlobalContext();
   const [isPreviewActive, setIsPreviewActive] = useState(false);
-  // const [currentMarkdownContent, setCurrentMarkdownContent] = useState(
-  //   allCurrentMarkdowns[activeMd]?.content
-  // );
-  // useEffect(() => {
-  //   setCurrentMarkdownContent(allCurrentMarkdowns[activeMd]?.content)
-  // }, [activeMd])
   //
   useEffect(() => {
     setActiveMdData(allCurrentMarkdowns[activeMd])
