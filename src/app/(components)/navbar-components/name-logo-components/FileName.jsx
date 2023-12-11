@@ -28,44 +28,52 @@ const FileName = () => {
           <label
             htmlFor="markdown-name"
             onClick={() => {
-              setIsNameInputActive(!isNameInputActive);
+              if (activeMdData.id !== "default-markdown") {
+                setIsNameInputActive(!isNameInputActive);
+              }
             }}
-            className={`${isNameInputActive ? "hidden" : "block"}`}
+            className={`${
+              isNameInputActive && activeMdData.id !== "default-markdown"
+                ? "hidden"
+                : "block"
+            }`}
           >
             {activeMdData?.name}
           </label>
-          <input
-            id="markdown-name"
-            name="markdown-name"
-            type="text"
-            onBlur={(e) => {
-              setIsNameInputActive(false);
-              setActiveMdData((oldValues) => {
-                const newData = {
-                  ...oldValues,
-                  name:
-                    e.target.value.endsWith(".md") &&
-                    e.target.value.trim().length >= 4
-                      ? e.target.value
-                      : !e.target.value.endsWith(".md") &&
-                        e.target.value.trim().length >= 1
-                      ? `${e.target.value}.md`
-                      : "untitled-document.md",
-                };
-                handleSaveNameChange(newData)
-                return newData
-              });
-            }}
-            className={`outline-none caret-orange py-[6px] ${
-              isNameInputActive ? "block" : "hidden"
-            }`}
-            value={activeMdData?.name}
-            onChange={(e) => {
-              setActiveMdData((oldValues) => {
-                return { ...oldValues, name: e.target.value };
-              });
-            }}
-          />
+          {activeMdData.id !== "default-markdown" && (
+            <input
+              id="markdown-name"
+              name="markdown-name"
+              type="text"
+              onBlur={(e) => {
+                setIsNameInputActive(false);
+                setActiveMdData((oldValues) => {
+                  const newData = {
+                    ...oldValues,
+                    name:
+                      e.target.value.endsWith(".md") &&
+                      e.target.value.trim().length >= 4
+                        ? e.target.value
+                        : !e.target.value.endsWith(".md") &&
+                          e.target.value.trim().length >= 1
+                        ? `${e.target.value}.md`
+                        : "untitled-document.md",
+                  };
+                  handleSaveNameChange(newData);
+                  return newData;
+                });
+              }}
+              className={`outline-none caret-orange py-[6px] ${
+                isNameInputActive ? "block" : "hidden"
+              }`}
+              value={activeMdData?.name}
+              onChange={(e) => {
+                setActiveMdData((oldValues) => {
+                  return { ...oldValues, name: e.target.value };
+                });
+              }}
+            />
+          )}
         </div>
       </div>
     </div>
