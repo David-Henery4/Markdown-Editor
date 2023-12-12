@@ -28,6 +28,8 @@ module.exports = {
       //
       orange: "#E46643",
       lightOrange: "#F39765",
+      //
+      darkBlue: "#191D24",
     },
     extend: {
       fontFamily: {
@@ -38,6 +40,7 @@ module.exports = {
       gridTemplateColumns: {
         nav: "auto 1fr auto",
         markdownPreviewContainer: "50% 50%",
+        signIn: "24px repeat(10,1fr) 24px",
       },
       gridTemplateRows: {
         mainInitialRows: "auto 1fr",
