@@ -2,7 +2,7 @@ import {CredentialsSignIn, DemoSignIn, OrSeperator, ProvidersSignIn} from "@/app
 
 const CardFooter = () => {
   return (
-  <div className="w-full px-[18px] py-12 bg-darkBlack">
+  <div className="w-full px-[18px] py-12 bg-darkBlack lgMobile:px-20">
     <ProvidersSignIn/>
     <OrSeperator/>
     <CredentialsSignIn/>

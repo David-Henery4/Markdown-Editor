@@ -10,7 +10,7 @@ const MarkdownFileBox = ({ name, createdAt, index }) => {
   // console.log(name)
   // console.log(createdAt)
   return (
-    <div
+    <li
       className={`w-full pb-2 flex justify-start items-center gap-4 group hover:cursor-pointer ${
         activeMd === index && "border-b-lighterBlack border-b-2"
       }`}
@@ -33,7 +33,7 @@ const MarkdownFileBox = ({ name, createdAt, index }) => {
           </AppHeadingMedium>
         </div>
       </div>
-    </div>
+    </li>
   );
 };
 

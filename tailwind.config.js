@@ -8,6 +8,7 @@ module.exports = {
   ],
   theme: {
     screens: {
+      lgMobile: "32em", // 512px
       smTablet: "37.5em", // 600px
       tablet: "47.5em", // 760px
       lgTablet: "54.25em", // 868px
@@ -44,6 +45,7 @@ module.exports = {
       },
       gridTemplateRows: {
         mainInitialRows: "auto 1fr",
+        markdownContainerRows: "auto 1fr",
       },
     },
   },

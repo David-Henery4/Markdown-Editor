@@ -12,6 +12,29 @@ input:-webkit-autofill:focus {
   font-weight: bold;
 }
 
-/* h1{
-  color: red;
-} */
+#sidebar-scroll {
+  overflow-y: auto;
+  scrollbar-width: thin; /* For Firefox */
+  scrollbar-color: #999 transparent; /* For Firefox */
+
+  &::-webkit-scrollbar {
+    width: 8px; /* width of the scrollbar */
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: #E46643; /* color of the thumb */
+    border-radius: 10px; /* rounded corners of the thumb */
+    border: 2px solid transparent; /* border around the thumb */
+  }
+
+  &::-webkit-scrollbar-thumb:hover {
+    background-color: #F39765; /* color of the thumb on hover */
+  }
+
+  &::-webkit-scrollbar-track {
+    background-color: transparent; /* color of the track */
+  }
+}
+
+/* orange: "#E46643",
+      lightOrange: "#F39765", */

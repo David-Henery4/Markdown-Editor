@@ -9,12 +9,13 @@ const Sidebar = ({children}) => {
   //
   return (
     <aside
-      className={`bg-darkBlack transition-all duration-[.4s] overflow-hidden ${
+      id="sidebar-scroll"
+      className={`bg-darkBlack transition-all duration-[.4s] overflow-x-hidden overflow-y-auto ${
         isSidebarOpen ? "min-w-[250px]" : "min-w-0"
       }`}
     >
       <div
-        className={`h-full px-6 py-7 min-w-[250px] transition-all duration-[.4s] text-white flex flex-col justify-between items-start ${
+        className={`min-h-full px-6 py-7 min-w-[250px] transition-all duration-[.4s] text-white flex flex-col justify-between items-start ${
           isSidebarOpen ? "translate-x-0" : "translate-x-[-250px]"
         }`}
       >
