@@ -8,7 +8,7 @@ const createUser = async (userData) => {
         "Content-Type": "application/json"
       },
       body: JSON.stringify({
-        // userData: {...userData}
+        userData: {...userData}
         // OR
         // markdownData: {...userData}
       })

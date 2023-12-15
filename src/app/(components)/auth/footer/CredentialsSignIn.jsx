@@ -13,7 +13,7 @@ import {
 
 const CredentialsSignIn = ({ csrfToken }) => {
   const router = useRouter();
-  // const {status} = useSession()
+  const {status} = useSession()
   //
   const [isSignUp, setIsSignUp] = useState(false);
   const [isLoading, setIsloading] = useState(false);

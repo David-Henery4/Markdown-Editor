@@ -1,6 +1,7 @@
 import { roboto, robotoSlab, robotoMono } from "./font/font";
 import "./globals.css";
 import Providers from "./providers/Providers";
+import AuthProvider from "./(components)/AuthProvider";
 
 export const metadata = {
   title: "Markdown Editor",
@@ -14,7 +15,9 @@ export default function RootLayout({ children }) {
       className={`${roboto.variable} ${robotoSlab.variable} ${robotoMono.variable}`}
     >
       <body className="font-roboto">
-        <Providers>{children}</Providers>
+        <AuthProvider>
+          <Providers>{children}</Providers>
+        </AuthProvider>
       </body>
     </html>
   );

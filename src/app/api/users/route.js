@@ -7,6 +7,9 @@ export async function POST (req) {
     //
     const body = await req.json()
     const userData = body.userData
+    // console.log(`req: ${req}`)
+    // console.log(`Body: ${body}`)
+    // console.log(`userBody: ${userData}`)
 
     // if data missing
     if (!userData.username || !userData.password || !userData.userId){

@@ -9,7 +9,7 @@ import {
   AddNewMarkdownBtn,
 } from "./sidebar-components";
 
-const Sidebar = ({ children }) => {
+const Sidebar = ({ children, user }) => {
   const { isSidebarOpen } = useGlobalContext();
   //
   return (
@@ -26,7 +26,7 @@ const Sidebar = ({ children }) => {
       >
         {children}
         <div className="w-full mt-8">
-          <SignOut />
+          <SignOut user={user} />
           <ThemeToggle />
         </div>
       </div>
