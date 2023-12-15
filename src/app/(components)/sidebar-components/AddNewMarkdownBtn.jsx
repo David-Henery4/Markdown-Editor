@@ -2,11 +2,15 @@
 import createMarkdown from "@/app/(lib)/createMarkdown";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import { useSession } from "next-auth/react";
 
 const AddNewMarkdownBtn = () => {
+  const {data} = useSession()
+  console.log(data)
+  //
   const [newMarkdown, setNewMarkdown] = useState({
     id: +new Date(),
-    userId: +new Date(), // temp till user set up
+    userId: data?.id, // temp till user set up
     createdAt: new Intl.DateTimeFormat("en-GB", {
       day: "2-digit",
       month: "long",

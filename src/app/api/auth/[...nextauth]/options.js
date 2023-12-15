@@ -13,6 +13,7 @@ export const options = {
           ...profile,
           id: profile.sub,
           role: userRole,
+          userId: profile.sub,
         };
       },
       clientId: process.env.GOOGLE_ID,
@@ -30,6 +31,7 @@ export const options = {
         return {
           ...profile,
           role: userRole,
+          userId: profile.id,
         };
       },
       clientId: process.env.GITHUB_ID,
@@ -86,8 +88,8 @@ export const options = {
       if (user) {
         return {
           ...token,
-          id: user._id,
-          username: user.username,
+          id: user._id || user.id,
+          username: user.username || user.name,
           role: user.role,
         };
       }
