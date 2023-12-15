@@ -1,10 +1,15 @@
-"use client"
+"use client";
 import { AppHeadingSmall } from "./shared";
 import { LogoIcon } from "../../../public/assets";
 import useGlobalContext from "@/app/context/useGlobalContext";
-import { ThemeToggle, MarkDownFileList, AddNewMarkdownBtn } from "./sidebar-components";
+import {
+  ThemeToggle,
+  SignOut,
+  MarkDownFileList,
+  AddNewMarkdownBtn,
+} from "./sidebar-components";
 
-const Sidebar = ({children}) => {
+const Sidebar = ({ children }) => {
   const { isSidebarOpen } = useGlobalContext();
   //
   return (
@@ -20,7 +25,10 @@ const Sidebar = ({children}) => {
         }`}
       >
         {children}
-        <ThemeToggle />
+        <div className="w-full mt-8">
+          <SignOut />
+          <ThemeToggle />
+        </div>
       </div>
     </aside>
   );

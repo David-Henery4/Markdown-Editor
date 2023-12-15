@@ -6,7 +6,7 @@ const ThemeToggle = () => {
   const { theme, setTheme, resolvedTheme } = useTheme();
   //
   return (
-    <div className="flex justify-start items-center gap-3 mt-8">
+    <div className="flex justify-start items-center gap-3 mt-4">
       <DarkModeIcon
         className={`${resolvedTheme === "dark" ? "fill-white" : "fill-veryDarkGrey"}`}
       />

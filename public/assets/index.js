@@ -11,6 +11,8 @@ import LightModeIcon from "./icon-light-mode.svg"
 import SignInLogo from "./sign-in-logo.svg"
 import GithubIcon from "./icon-github.svg"
 import GoogleIcon from "./icon-google.svg"
+import VisibleEyeIcon from "./visible.svg"
+import VisibleCrossedEyeIcon from "./not-visible.svg"
 
 export {
   MenuIcon,
@@ -25,5 +27,7 @@ export {
   LightModeIcon,
   GithubIcon,
   GoogleIcon,
-  SignInLogo
+  SignInLogo,
+  VisibleCrossedEyeIcon,
+  VisibleEyeIcon,
 }

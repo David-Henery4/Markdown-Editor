@@ -106,6 +106,6 @@ export const options = {
   //
   secret: process.env.NEXT_AUTH_SECRET,
   pages: {
-    // signIn: "/auth/signin"
+    signIn: "/auth/signin"
   }
 };

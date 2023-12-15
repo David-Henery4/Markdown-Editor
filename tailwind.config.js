@@ -31,6 +31,8 @@ module.exports = {
       lightOrange: "#F39765",
       //
       darkBlue: "#191D24",
+      //
+      red: "#D73737",
     },
     extend: {
       fontFamily: {

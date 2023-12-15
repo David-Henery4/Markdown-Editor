@@ -1,61 +1,169 @@
-"use client"
+"use client";
 import { useState } from "react";
-import {useSession, signIn} from "next-auth/react"
+import { useSession, signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import createUser from "@/app/(lib)/createUser";
+import {
+  SignInError,
+  SubmitBtn,
+  DuplicateUser,
+  CredentialsInput,
+  LoadingSpinner,
+} from "./credentials-signin-components";
 
-const CredentialsSignIn = () => {
-  const [isSignup, setIsSignup] = useState(false);
-  const [isLoading, setIsloading] = useState(false)
+const CredentialsSignIn = ({ csrfToken }) => {
+  const router = useRouter();
+  // const {status} = useSession()
   //
-  const [password,setPassword] = useState("")
-  const [username,setUsername] = useState("")
+  const [isSignUp, setIsSignUp] = useState(false);
+  const [isLoading, setIsloading] = useState(false);
+  //
+  const [password, setPassword] = useState("");
+  const [username, setUsername] = useState("");
+  //
+  const [isPasswordInvalid, setIsPasswordInvalid] = useState(false);
+  const [isPasswordVisible, setIsPasswordVisible] = useState(false);
+  const [isUsernameInvalid, setIsUsernameInvalid] = useState(false);
+  const [isSignInError, setIsSignInError] = useState(false);
+  const [isDuplicateSignUpOrError, setIsDuplicateSignUpOrError] = useState({
+    msg: "",
+    isError: false,
+  });
+  //
+  const handleValidation = () => {
+    username.trim() === ""
+      ? setIsUsernameInvalid(true)
+      : setIsUsernameInvalid(false);
+    password.trim() === ""
+      ? setIsPasswordInvalid(true)
+      : setIsPasswordInvalid(false);
+    //
+    return isPasswordInvalid || isUsernameInvalid ? true : false;
+  };
+  //
+  const handleSubmit = async () => {
+    if (username.trim() === "" || password.trim() === "") return;
+    setIsPasswordInvalid(false);
+    setIsUsernameInvalid(false);
+    //
+    if (!isSignUp) {
+      handleSignIn();
+    }
+    if (isSignUp) {
+      handleSignUp();
+    }
+  };
+  //
+  const handleSignIn = async () => {
+    try {
+      setIsloading(true);
+      setIsSignInError(false);
+      // Don't think we need userId with the signin
+      const data = await signIn("credentials", {
+        redirect: false,
+        username,
+        password,
+      });
+      //
+      if (data.ok) {
+        setIsloading(false);
+        setIsSignInError(false);
+        router.refresh();
+        return;
+      }
+      //
+      setIsloading(false);
+      setIsSignInError(true);
+      //
+    } catch (error) {
+      setIsSignInError(true);
+      setIsloading(false);
+      console.error(error);
+    }
+  };
+  //
+  const handleSignUp = async () => {
+    setIsloading(true);
+    setIsDuplicateSignUpOrError({ msg: "", isError: false });
+    //
+    const res = await createUser({
+      username,
+      password,
+      userId: self.crypto.randomUUID(),
+    });
+    //
+    if (res.message === "Dulicate Username") {
+      setIsDuplicateSignUpOrError({
+        msg: "Username already exists",
+        isError: true,
+      });
+      setIsloading(false);
+      return;
+    }
+    if (res.message === "Error creating account") {
+      setIsDuplicateSignUpOrError({
+        msg: res?.message,
+        isError: true,
+      });
+      setIsloading(false);
+      return;
+    }
+    if (res.message === "User Created") {
+      handleSignIn();
+      return;
+    }
+  };
   //
   return (
-    <form className="w-full" onClick={(e) => e.preventDefault()}>
+    <form
+      className="w-full grid gap-4"
+      onSubmit={(e) => {
+        e.preventDefault();
+        handleValidation();
+        handleSubmit();
+      }}
+    >
+      <input name="csrfToken" type="hidden" defaultValue={csrfToken} />
 
-      <div className="w-full">
-        <label htmlFor="username" className="text-sm font-bold">
-          Username
-        </label>
-        <input
-          id="username"
-          name="username"
-          className="w-full rounded-md py-3 px-4 outline-none mt-2"
-          type="text"
-        />
-      </div>
+      {isLoading ? (
+        <LoadingSpinner />
+      ) : (
+        <>
+          <CredentialsInput
+            name="username"
+            label="username"
+            value={username}
+            setValue={setUsername}
+            isInputInvalid={isUsernameInvalid}
+          />
+          <CredentialsInput
+            name="password"
+            label="password"
+            value={password}
+            setValue={setPassword}
+            isInputInvalid={isPasswordInvalid}
+            isPasswordVisible={isPasswordVisible}
+            setIsPasswordVisible={setIsPasswordVisible}
+          />
+        </>
+      )}
 
-      <div className="w-full mt-4">
-        <label htmlFor="password" className="text-sm font-bold">
-          Password
-        </label>
-        <input
-          id="password"
-          name="password"
-          className="w-full rounded-md py-3 px-4 outline-none mt-2"
-          type="text"
-        />
-      </div>
+      {isSignInError && <SignInError />}
+      {isDuplicateSignUpOrError?.isError && (
+        <DuplicateUser msg={isDuplicateSignUpOrError?.msg} />
+      )}
 
-      <button className="w-full py-6 px-3 mt-9 rounded-[10px] font-bold bg-orange hover:bg-lightOrange active:bg-orange">
-        Login
-      </button>
-
-      <div className="w-full text-xs mt-4">
-        <p>
-          {isSignup ? "Already have an account?" : "Don't have an account?"}
-          <span
-            className="text-orange ml-1 hover:cursor-pointer"
-            onClick={() => setIsSignup(!isSignup)}
-          >
-            {isSignup ? "Log in!" : "Sign up!"}
-          </span>
-        </p>
-      </div>
-
+      <SubmitBtn
+        isSignUp={isSignUp}
+        isLoading={isLoading}
+        setIsSignUp={setIsSignUp}
+        setPassword={setPassword}
+        setUsername={setUsername}
+        setIsSignInError={setIsSignInError}
+        setIsDuplicateSignUpOrError={setIsDuplicateSignUpOrError}
+      />
     </form>
   );
-}
+};
 
-export default CredentialsSignIn
+export default CredentialsSignIn;

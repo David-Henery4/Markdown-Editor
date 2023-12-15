@@ -9,7 +9,7 @@ export async function POST (req) {
     const userData = body.userData
 
     // if data missing
-    if (!userData.username || !userData.password){
+    if (!userData.username || !userData.password || !userData.userId){
       return NextResponse.json({message: "All fields are required"}, {status: 400})
     }
 
@@ -30,6 +30,6 @@ export async function POST (req) {
 
   } catch (error) {
     console.log(error)
-    return NextResponse.json({message: "Error", error})
+    return NextResponse.json({message: "Error creating account", error})
   }
 }

@@ -32,7 +32,7 @@ const Markdown = ({
       <TextareaAutosize
         name="markdown-text"
         id="markdown-text"
-        className="resize-none w-full p-4 overflow-hidden outline-none text-[14px] leading-[24px] text-lighterBlack font-robotoMono max-w-[672px] mx-auto dark:bg-veryDarkBlack dark:text-lightGrey"
+        className="resize-none w-full min-h-full p-4 overflow-hidden outline-none text-[14px] leading-[24px] text-lighterBlack font-robotoMono max-w-[672px] mx-auto dark:bg-veryDarkBlack dark:text-lightGrey"
         value={activeMdData.content}
         onChange={(e) =>
           setActiveMdData((oldValues) => {
