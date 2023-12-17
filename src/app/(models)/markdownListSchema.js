@@ -4,8 +4,8 @@ mongoose.connect(process.env.DATABASE_URI);
 mongoose.Promise = global.Promise
 
 const markdownListSchema = new Schema({
-  id: { type: Number, required: true },
-  userId: { type: Number, required: true },
+  id: { type: String, required: true },
+  userId: { type: String, required: true },
   createdAt: String,
   name: { type: String, required: true },
   content: String,

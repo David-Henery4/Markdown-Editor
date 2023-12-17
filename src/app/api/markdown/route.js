@@ -1,6 +1,7 @@
 import markdownList from "@/app/(models)/markdownListSchema";
 import { NextResponse } from "next/server";
 
+// Get all markdowns
 export async function GET() {
   try {
     console.log("called")
@@ -21,6 +22,7 @@ export async function GET() {
   }
 }
 
+// Create markdown
 export async function POST (req) {
   try {
     const body = await req.json()

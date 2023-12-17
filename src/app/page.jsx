@@ -14,11 +14,13 @@ export default async function Home() {
     redirect("/auth/signin");
   }
   console.log(session)
-  const allMarkdowns = await markdownList.find({});
+  const allUserMarkdowns = await markdownList.find({userId: session?.id});
+  console.log(`${session.name || session.username}: `, allUserMarkdowns)
+  // const allMarkdowns = await markdownList.find({});
   // const allMarkdownsList = allMarkdowns.json()
   // console.log("home", JSON.parse(JSON.stringify(allMarkdowns)))
   const allCurrentMarkdowns = [
-    ...JSON.parse(JSON.stringify(allMarkdowns)),
+    ...JSON.parse(JSON.stringify(allUserMarkdowns)),
     defaultWelcomeMarkdownData,
   ];
   //
