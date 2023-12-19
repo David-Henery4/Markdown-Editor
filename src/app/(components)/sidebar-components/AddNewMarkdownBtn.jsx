@@ -6,13 +6,10 @@ import { useSession } from "next-auth/react";
 
 const AddNewMarkdownBtn = () => {
   const { data } = useSession();
-  // console.log(self.crypto.randomUUID());
-  // console.log(`${typeof data.id}: ${data.id}`);
-  // console.log(`${typeof +data.id}: ${+data.id}`);
   //
   const [newMarkdown, setNewMarkdown] = useState({
     id: self.crypto.randomUUID(),
-    userId: `${data?.id}`, // temp till user set up
+    userId: `${data?.id}`,
     createdAt: new Intl.DateTimeFormat("en-GB", {
       day: "2-digit",
       month: "long",

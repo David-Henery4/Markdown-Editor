@@ -15,10 +15,6 @@ export default async function Home() {
   }
   console.log(session)
   const allUserMarkdowns = await markdownList.find({userId: session?.id});
-  console.log(`${session.name || session.username}: `, allUserMarkdowns)
-  // const allMarkdowns = await markdownList.find({});
-  // const allMarkdownsList = allMarkdowns.json()
-  // console.log("home", JSON.parse(JSON.stringify(allMarkdowns)))
   const allCurrentMarkdowns = [
     ...JSON.parse(JSON.stringify(allUserMarkdowns)),
     defaultWelcomeMarkdownData,

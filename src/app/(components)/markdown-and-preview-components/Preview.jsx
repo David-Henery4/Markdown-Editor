@@ -49,7 +49,12 @@ const Preview = ({
       </div>
       {/* Can make content server component by passing in as children (But is there any point/benefit) */}
       {/* Was using (large was removed): prose tablet:prose-xl */}
-      <div className="flex-1 w-full max-w-[672px] mx-auto p-4 text-darkGrey dark:text-lightGrey prose">
+      {/* Will need this, if using html2canvas route :bg-white dark:bg-veryDarkBlack */}
+      <div
+        id="markdown-preview"
+        className="flex-1 w-full max-w-[672px] mx-auto p-4 text-darkGrey dark:text-lightGrey bg-white dark:bg-veryDarkBlack prose"
+        // style={{ fontFamily: "'Roboto Slab', serif" }}
+      >
         <MarkdownComponent
           rehypePlugins={[rehypeRaw]}
           remarkPlugins={[remarkGfm]}
@@ -66,7 +71,7 @@ const Preview = ({
             strong: PreviewParagraphBold,
             a: PreviewLink,
             code: PreviewCode,
-            pre:PreviewPre,
+            pre: PreviewPre,
           }}
         >
           {activeMdData?.content}

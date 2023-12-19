@@ -19,7 +19,9 @@ const DeleteBtn = () => {
     <button
       onClick={() => handleDeleteMarkdown()}
       disabled={activeMdData?.id === "default-markdown"}
-      className={`${activeMdData?.id === "default-markdown" && "hidden"}`}
+      className={` fill-darkGrey hover:fill-white active:fill-darkGrey ${
+        activeMdData?.id === "default-markdown" && "hidden"
+      }`}
     >
       <DeleteIcon />
     </button>

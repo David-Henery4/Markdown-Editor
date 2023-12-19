@@ -9,8 +9,6 @@ const createUser = async (userData) => {
       },
       body: JSON.stringify({
         userData: {...userData}
-        // OR
-        // markdownData: {...userData}
       })
     })
     //

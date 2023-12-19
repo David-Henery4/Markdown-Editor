@@ -29,6 +29,7 @@ const Markdown = ({
       {/* Can make content server component by passing in as children (But is there any point/benefit) */}
       {/* <div> */}
       {/* </div> */}
+      {/* <textarea></textarea> */}
       <TextareaAutosize
         name="markdown-text"
         id="markdown-text"

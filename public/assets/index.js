@@ -13,6 +13,7 @@ import GithubIcon from "./icon-github.svg"
 import GoogleIcon from "./icon-google.svg"
 import VisibleEyeIcon from "./visible.svg"
 import VisibleCrossedEyeIcon from "./not-visible.svg"
+import DownloadIcon from "./icon-download.svg"
 
 export {
   MenuIcon,
@@ -30,4 +31,5 @@ export {
   SignInLogo,
   VisibleCrossedEyeIcon,
   VisibleEyeIcon,
+  DownloadIcon,
 }
