@@ -54,28 +54,35 @@ const Preview = ({
         id="markdown-preview"
         className="flex-1 w-full max-w-[672px] mx-auto p-4 text-darkGrey dark:text-lightGrey bg-white dark:bg-veryDarkBlack prose"
         // style={{ fontFamily: "'Roboto Slab', serif" }}
+        // dark:#151619 / light: #ffffff
       >
-        <MarkdownComponent
-          rehypePlugins={[rehypeRaw]}
-          remarkPlugins={[remarkGfm]}
-          components={{
-            h1: HeadingPrimary,
-            h2: HeadingSecondary,
-            h3: HeadingThree,
-            h4: HeadingFour,
-            h5: HeadingFive,
-            h6: HeadingSix,
-            p: PreviewParagraph,
-            li: PreviewListItem,
-            blockquote: PreviewBlockquote,
-            strong: PreviewParagraphBold,
-            a: PreviewLink,
-            code: PreviewCode,
-            pre: PreviewPre,
-          }}
+        <div
+          // style={{
+          //   color: "red",
+          // }}
         >
-          {activeMdData?.content}
-        </MarkdownComponent>
+          <MarkdownComponent
+            rehypePlugins={[rehypeRaw]}
+            remarkPlugins={[remarkGfm]}
+            components={{
+              h1: HeadingPrimary,
+              h2: HeadingSecondary,
+              h3: HeadingThree,
+              h4: HeadingFour,
+              h5: HeadingFive,
+              h6: HeadingSix,
+              p: PreviewParagraph,
+              li: PreviewListItem,
+              blockquote: PreviewBlockquote,
+              strong: PreviewParagraphBold,
+              a: PreviewLink,
+              code: PreviewCode,
+              pre: PreviewPre,
+            }}
+          >
+            {activeMdData?.content}
+          </MarkdownComponent>
+        </div>
       </div>
     </div>
   );

@@ -1,12 +1,16 @@
-"use client"
-import { DownloadIcon } from "../../../../public/assets"
+"use client";
+// import {} from "../../../../public/local-fonts/RobotoSlab-VariableFont_wght.ttf";
+// import {} from "../../(pdf)/pdf-styles.css";
+import { DownloadIcon } from "../../../../public/assets";
 import useGlobalContext from "@/app/context/useGlobalContext";
 import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
+import { useTheme } from "next-themes";
 //
 import html2PDF from "jspdf-html2canvas";
 
 const DownloadBtn = () => {
+  const { theme } = useTheme();
   const { activeMdData } = useGlobalContext();
   //
   const handleDownloadMarkdown = () => {
@@ -16,7 +20,60 @@ const DownloadBtn = () => {
     link.download = "untitled.md";
     link.click();
     URL.revokeObjectURL(link.href);
-  }
+  };
+  //
+  const handlePDFCall = async () => {
+    let getStyles;
+    if (theme === "dark"){
+      getStyles = await fetch(`/(pdf)/pdf-styles-dark.css`);
+    }
+    if (theme === "light"){
+      getStyles = await fetch(`/(pdf)/pdf-styles.css`);
+    }
+    const currentStyles = await getStyles?.text();
+    // console.log(await getStyles?.text())
+    // console.log(getStyles)
+    // console.log(await getStyles.text())
+    const markdownPreviewHtml =
+      document.getElementById("markdown-preview").innerHTML;
+    try {
+      const res = await fetch("http://localhost:3000/api/pdf", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          htmlContent: markdownPreviewHtml,
+          currentStyles,
+          theme
+        }),
+      });
+      if (res.ok) {
+        // Handle successful response
+        console.log("PDF generation request successful");
+        //
+        // Create a Blob from the response data
+        console.log(res)
+        const pdfBlob = await res.blob();
+
+        // Create a link element to trigger the download
+        const link = document.createElement("a");
+        link.href = URL.createObjectURL(pdfBlob);
+        link.download = "generated.pdf";
+
+        // Trigger the download
+        link.click();
+
+        // Clean up the URL.createObjectURL
+        URL.revokeObjectURL(link.href);
+      } else {
+        // Handle error response
+        console.error("PDF generation request failed");
+      }
+    } catch (error) {
+      console.error("An error occurred:", error);
+    }
+  };
   //
   const handlePDFDownload = async () => {
     const markdownPreview = document.getElementById("markdown-preview");
@@ -80,15 +137,15 @@ const DownloadBtn = () => {
     //   windowWidth: 675, //window width in CSS pixels
     // })
     // pdf.save()
-  }
+  };
   //
-  console.log("Download component")
+  console.log("Download component");
   //
   return (
-    <button onClick={handlePDFDownload}>
+    <button onClick={handlePDFCall}>
       <DownloadIcon className="fill-darkGrey hover:fill-white active:fill-darkGrey" />
     </button>
   );
-}
+};
 
-export default DownloadBtn
+export default DownloadBtn;
