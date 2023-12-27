@@ -14,6 +14,9 @@ import GoogleIcon from "./icon-google.svg"
 import VisibleEyeIcon from "./visible.svg"
 import VisibleCrossedEyeIcon from "./not-visible.svg"
 import DownloadIcon from "./icon-download.svg"
+import DownloadPDFIcon from "./icon-pdf.svg"
+import ChevDown from "./chev-down.svg"
+import ChevUp from "./chev-up.svg"
 
 export {
   MenuIcon,
@@ -32,4 +35,7 @@ export {
   VisibleCrossedEyeIcon,
   VisibleEyeIcon,
   DownloadIcon,
+  ChevDown,
+  ChevUp,
+  DownloadPDFIcon
 }
