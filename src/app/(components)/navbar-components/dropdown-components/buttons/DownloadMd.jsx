@@ -19,7 +19,9 @@ const DownloadMd = ({ setIsDropdownOpen }) => {
       className="w-full flex flex-col-reverse gap-2 justify-between items-center group smTablet:gap-12 smTablet:flex-row hover:cursor-pointer"
       onClick={handleDownloadMarkdown}
     >
-      <p className="w-max group-hover:text-orange">Download as Markdown</p>
+      <p className="w-max text-white group-hover:text-orange">
+        Download as Markdown
+      </p>
       <button>
         <DownloadIcon className="fill-white group-hover:fill-orange" />
       </button>

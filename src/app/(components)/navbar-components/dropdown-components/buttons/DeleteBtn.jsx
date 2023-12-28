@@ -23,7 +23,7 @@ const DeleteBtn = ({ setIsDropdownOpen }) => {
       }`}
       onClick={() => handleDeleteMarkdown()}
     >
-      <p className="w-max group-hover:text-orange">Delete Markdown</p>
+      <p className="w-max text-white group-hover:text-orange">Delete Markdown</p>
       <button
         disabled={activeMdData?.id === "default-markdown"}
         className={` fill-darkGrey hover:fill-white active:fill-darkGrey ${
