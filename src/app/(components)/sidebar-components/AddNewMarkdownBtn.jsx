@@ -1,7 +1,7 @@
-"use client"
+"use client";
 import createMarkdown from "@/app/(lib)/createMarkdown";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useSession } from "next-auth/react";
 
 const AddNewMarkdownBtn = () => {
@@ -26,11 +26,20 @@ const AddNewMarkdownBtn = () => {
         ...oldValues,
         id: self.crypto.randomUUID(),
       };
-    })
+    });
     const res = await createMarkdown(newDefaultMarkdown);
     console.log(res);
     refresh();
   };
+  //
+  useEffect(() => {
+    setNewMarkdown((oldValues) => {
+      return {
+        ...oldValues,
+        userId: `${data?.id}`,
+      };
+    });
+  }, [data?.id]);
   //
   return (
     <button
@@ -40,6 +49,6 @@ const AddNewMarkdownBtn = () => {
       + New Document
     </button>
   );
-}
+};
 
-export default AddNewMarkdownBtn
+export default AddNewMarkdownBtn;

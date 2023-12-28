@@ -14,7 +14,7 @@ const CredentialsInput = ({
 }) => {
   return (
     <div className="full">
-      <label htmlFor={name} className="text-sm font-bold capitalize">
+      <label htmlFor={name} className="text-white text-sm font-bold capitalize">
         {label}
       </label>
       <div className="relative mt-2 ">
@@ -30,7 +30,7 @@ const CredentialsInput = ({
               ? !isPasswordVisible && "password"
               : "text"
           }`}
-          className={`w-full rounded-md py-3 pl-4 pr-11 outline-none border ${
+          className={`bg-lightBlack text-white w-full rounded-md py-3 pl-4 pr-11 outline-none border ${
             isInputInvalid ? "border-red" : "border-red/0"
           } ${
             name === "password" &&

@@ -14,7 +14,7 @@ const ProvidersSignIn = ({ providers }) => {
             <button
               key={provider.name}
               onClick={() => signIn(provider.id)}
-              className={`w-full p-6 mt-4 flex justify-center items-center rounded-[10px] ${
+              className={`text-white w-full p-6 mt-4 flex justify-center items-center rounded-[10px] ${
                 isGitHub && "bg-[#000] hover:bg-veryDarkBlack active:bg-[#000]"
               } ${
                 isGoogle &&

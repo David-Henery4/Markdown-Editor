@@ -1,7 +1,7 @@
-import { NextResponse, NextRequest } from "next/server";
+import { NextResponse } from "next/server";
 import puppeteer from "puppeteer";
 
-export async function POST(req, res) {
+export async function POST(req) {
   try {
     const { htmlContent, currentStyles } = await req.json();
     //
@@ -24,6 +24,6 @@ export async function POST(req, res) {
       },
     });
   } catch (error) {
-    return NextResponse.json({ msg: "Essor", error }, { status: 400 });
+    return NextResponse.json({ msg: "Error creating PDF", error }, { status: 400 });
   }
 }
