@@ -2,9 +2,12 @@
 
 const deleteMarkdown = async (id) => {
   try {
-    const res = await fetch(`http://localhost:3000/api/markdown/${id}`, {
-      method: "DELETE",
-    });
+    const res = await fetch(
+      `https://markdown-editor-md.vercel.app/api/markdown/${id}`,
+      {
+        method: "DELETE",
+      }
+    );
     //
     return await res.json()
     //

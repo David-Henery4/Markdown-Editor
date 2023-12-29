@@ -20,7 +20,7 @@ const DownloadPdf = ({ setIsDropdownOpen }) => {
     setIsDropdownOpen(false);
     //
     try {
-      const res = await fetch("http://localhost:3000/api/pdf", {
+      const res = await fetch("https://markdown-editor-md.vercel.app/api/pdf", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
