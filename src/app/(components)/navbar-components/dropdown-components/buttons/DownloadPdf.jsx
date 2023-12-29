@@ -31,6 +31,7 @@ const DownloadPdf = ({ setIsDropdownOpen }) => {
           currentStyles,
         }),
       });
+      console.log(res)
       if (res.ok) {
         // Handle successful response
         console.log("PDF generation request successful");
