@@ -27,8 +27,8 @@ const DownloadPdf = ({ setIsDropdownOpen }) => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          htmlContent: markdownPreviewHtml,
-          currentStyles,
+          htmlContent: encodeURIComponent(markdownPreviewHtml),
+          currentStyles: encodeURIComponent(currentStyles),
         }),
       });
       console.log(res)
