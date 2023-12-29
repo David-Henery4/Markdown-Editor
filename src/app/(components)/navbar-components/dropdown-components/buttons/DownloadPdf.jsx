@@ -18,7 +18,8 @@ const DownloadPdf = ({ setIsDropdownOpen }) => {
       document.getElementById("markdown-preview").innerHTML;
     //
     setIsDropdownOpen(false);
-    //
+    // Prod:url https://markdown-editor-md.vercel.app/
+    // Dev:url http://localhost:3000/
     try {
       const res = await fetch("https://markdown-editor-md.vercel.app/api/pdf", {
         method: "POST",
