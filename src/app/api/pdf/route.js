@@ -4,10 +4,6 @@ import puppeteer from "puppeteer";
 export async function POST(req) {
   try {
     const { htmlContent, currentStyles } = await req.json();
-    console.log("html recieved:",htmlContent)
-    console.log("current styles:", currentStyles);
-    console.log("PDF CALLED");
-
     // changed to headless: "new"
     const browser = await puppeteer.launch({ headless: "new" });
     const page = await browser.newPage();
