@@ -31,7 +31,7 @@ const DownloadPdf = ({ setIsDropdownOpen }) => {
           currentStyles
         }),
       });
-      console.log(res)
+      console.log("response",res)
       if (res.ok) {
         // Handle successful response
         console.log("PDF generation request successful");
@@ -51,6 +51,7 @@ const DownloadPdf = ({ setIsDropdownOpen }) => {
       }
     } catch (error) {
       console.error("An error occurred:", error);
+      console.log("An error occurred:", error);
     }
   };
   //

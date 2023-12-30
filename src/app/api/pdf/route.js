@@ -30,6 +30,7 @@ export async function POST(req) {
       },
     });
   } catch (error) {
+    console.log("error",error)
     return NextResponse.json({ msg: "Error creating PDF", error }, { status: 400 });
   }
 }
