@@ -5,14 +5,14 @@ const DownloadPdf = ({ setIsDropdownOpen }) => {
   const { theme } = useTheme();
   //
   const handlePDFCall = async () => {
-    // let getStyles;
-    // if (theme === "dark") {
-    //   getStyles = await fetch(`/(pdf)/pdf-styles-dark.css`);
-    // }
-    // if (theme === "light") {
-    //   getStyles = await fetch(`/(pdf)/pdf-styles.css`);
-    // }
-    // const currentStyles = await getStyles?.text();
+    let getStyles;
+    if (theme === "dark") {
+      getStyles = await fetch(`/(pdf)/pdf-styles-dark.css`);
+    }
+    if (theme === "light") {
+      getStyles = await fetch(`/(pdf)/pdf-styles.css`);
+    }
+    const currentStyles = await getStyles?.text();
     //
     const markdownPreviewHtml =
       document.getElementById("markdown-preview").innerHTML;
@@ -28,7 +28,7 @@ const DownloadPdf = ({ setIsDropdownOpen }) => {
         },
         body: JSON.stringify({
           htmlContent: markdownPreviewHtml,
-          // currentStyles
+          currentStyles
         }),
       });
       console.log(res)

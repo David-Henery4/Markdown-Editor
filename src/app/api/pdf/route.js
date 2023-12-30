@@ -4,17 +4,16 @@ import puppeteer from "puppeteer";
 export async function POST(req) {
   try {
     // removed: currentStyles
-    const { htmlContent } = await req.json();
+    const { htmlContent, currentStyles } = await req.json();
     console.log("html recieved:", htmlContent);
-    // console.log("current styles:", currentStyles);
+    console.log("current styles:", currentStyles);
     console.log("PDF CALLED");
 
     // changed to headless: "new"
     const browser = await puppeteer.launch();
     const page = await browser.newPage();
     //
-    const htmlContentAndStyles = `<style>@import url(https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@300;400;500;600;700;800&display=swap); @import url(https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Roboto+Slab:wght@300;400;500;600;700;800&display=swap); h1 {font-weight: 700;font-size: 32px;color: #35393f;} </style>${htmlContent}`;
-    // const htmlContentAndStyles = `<style>@import url(https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@300;400;500;600;700;800&display=swap); @import url(https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Roboto+Slab:wght@300;400;500;600;700;800&display=swap); ${currentStyles} </style>${htmlContent}`;
+    const htmlContentAndStyles = `<style>@import url(https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@300;400;500;600;700;800&display=swap); @import url(https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Roboto+Slab:wght@300;400;500;600;700;800&display=swap); ${currentStyles} </style>${htmlContent}`;
     //
     // await page.setContent(htmlContentAndStyles);
     await page.setContent(htmlContentAndStyles, { waitUntil: "networkidle2" });
