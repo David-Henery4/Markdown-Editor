@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
-import puppeteer, { executablePath } from "puppeteer";
+import puppeteer, { executablePath } from "puppeteer-core";
+// puppeteer uninstalled
 
 export async function POST(req) {
   try {
@@ -13,16 +14,16 @@ export async function POST(req) {
     const brows = await puppeteer.connect({
       browserWSEndpoint: `wss://chrome.browserless.io?token=${process.env.BLESS_TOKEN}`,
     });
-    const browser = await puppeteer.launch({
-      headless: true,
-      executablePath: puppeteer.executablePath(),
-      // process.env.NODE_ENV === "production"
-      //   ? process.env.PUPPETEER_EXECUTABLE_PATH
-      //   : puppeteer.executablePath(),
-      args: ["--no-sandbox", "--single-process"],
-      ignoreDefaultArgs: ["--disable-extensions"],
-      // browserWSEndpoint: `wss://chrome.browserless.io?token=${process.env.BLESS_TOKEN}`,
-    });
+    // const browser = await puppeteer.launch({
+    //   headless: true,
+    //   executablePath: puppeteer.executablePath(),
+    //   // process.env.NODE_ENV === "production"
+    //   //   ? process.env.PUPPETEER_EXECUTABLE_PATH
+    //   //   : puppeteer.executablePath(),
+    //   args: ["--no-sandbox", "--single-process"],
+    //   ignoreDefaultArgs: ["--disable-extensions"],
+    //   // browserWSEndpoint: `wss://chrome.browserless.io?token=${process.env.BLESS_TOKEN}`,
+    // });
 
     const page = await brows.newPage();
     // const page = await browser.newPage();
