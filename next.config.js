@@ -10,6 +10,9 @@ const nextConfig = {
 
     return config;
   },
+  experimental: {
+    serverComponentsExternalPackages: ["puppeteer-core"],
+  },
 };
 
 module.exports = nextConfig
