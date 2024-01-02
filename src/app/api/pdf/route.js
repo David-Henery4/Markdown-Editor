@@ -8,7 +8,7 @@ export async function POST(req) {
     console.log("html recieved:", htmlContent);
     console.log("current styles:", currentStyles);
     console.log("PDF CALLED");
-
+    // 
     // changed to headless: "new"
     const brows = await puppeteer.connect({
       browserWSEndpoint: `wss://chrome.browserless.io?token=${process.env.BLESS_TOKEN}`,
