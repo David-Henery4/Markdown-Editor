@@ -139,7 +139,7 @@ import pdfStyles from "@/app/(pdf)/pdfStyles";
 const DownloadPdf = ({ setIsDropdownOpen }) => {
   // const [instance, updateInstance] = usePDF({ document: getDoc() });
   // const [doc, setDoc] = useState({})
-  const { theme } = useTheme();
+  const { theme, resolvedTheme } = useTheme();
   //
   const handlePDFCall = async () => {
     let getStyles;
@@ -193,11 +193,11 @@ const DownloadPdf = ({ setIsDropdownOpen }) => {
         },
         body: JSON.stringify({
           htmlContent: markdownPreviewHtml,
-          currentStyles: pdfStyles(theme)
+          currentStyles: pdfStyles(resolvedTheme),
         }),
       });
       console.log("response",res)
-      console.log("theme",theme)
+      console.log("theme", resolvedTheme);
       if (res.ok) {
         // Handle successful response
         console.log("PDF generation request successful");
