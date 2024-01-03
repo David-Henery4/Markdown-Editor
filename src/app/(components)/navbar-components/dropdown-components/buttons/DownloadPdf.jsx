@@ -1,5 +1,6 @@
 import { DownloadPDFIcon } from "../../../../../../public/assets";
 import { useTheme } from "next-themes";
+import pdfStyles from "@/app/(pdf)/pdfStyles";
 // import CreatedPdf from "@/app/(pdf)/CreatedPdf";
 // import { usePDF, Document, Page, pdf, Font } from "@react-pdf/renderer";
 // import { Html } from "react-pdf-html";
@@ -192,7 +193,7 @@ const DownloadPdf = ({ setIsDropdownOpen }) => {
         },
         body: JSON.stringify({
           htmlContent: markdownPreviewHtml,
-          currentStyles
+          currentStyles: pdfStyles(theme)
         }),
       });
       console.log("response",res)
