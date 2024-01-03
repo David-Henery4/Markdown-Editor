@@ -6,9 +6,7 @@ import useGlobalContext from "@/app/context/useGlobalContext";
 const MarkdownFileBox = ({ name, createdAt, index }) => {
   const { handleSetActiveMarkdownIndex, activeMd, activeMdData } =
     useGlobalContext();
-  // console.log("props: " , props)
-  // console.log(name)
-  // console.log(createdAt)
+  //
   return (
     <li
       className={`w-full pb-2 flex justify-start items-center gap-4 group hover:cursor-pointer ${

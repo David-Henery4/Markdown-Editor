@@ -12,7 +12,6 @@ import {
   HeadingSix,
 } from "../shared/previewHeadings";
 import {
-  MarkdownPreviewParagraphBold,
   PreviewParagraph,
   PreviewParagraphBold,
   PreviewListItem,
@@ -23,14 +22,11 @@ import {
 } from "../shared/previewParagraphs";
 import useGlobalContext from "@/app/context/useGlobalContext";
 
-// import tempData from "../../../../data.json"
-
 const Preview = ({
   isPreviewActive,
-  setIsPreviewActive,
-  currentMarkdownContent,
+  setIsPreviewActive
 }) => {
-  const { activeMdData, setActiveMdData } = useGlobalContext();
+  const { activeMdData } = useGlobalContext();
   //
   return (
     <div
@@ -47,19 +43,11 @@ const Preview = ({
           setIsPreviewActive={setIsPreviewActive}
         />
       </div>
-      {/* Can make content server component by passing in as children (But is there any point/benefit) */}
-      {/* Was using (large was removed): prose tablet:prose-xl */}
-      {/* Will need this, if using html2canvas route :bg-white dark:bg-veryDarkBlack */}
       <div
         id="markdown-preview"
         className="flex-1 w-full max-w-[672px] mx-auto p-4 text-darkGrey dark:text-lightGrey bg-white dark:bg-veryDarkBlack prose"
-        // style={{ fontFamily: "'Roboto Slab', serif" }}
-        // dark:#151619 / light: #ffffff
       >
         <div
-          // style={{
-          //   color: "red",
-          // }}
         >
           <MarkdownComponent
             rehypePlugins={[rehypeRaw]}

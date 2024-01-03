@@ -1,4 +1,3 @@
-// import getAllMarkdowns from "@/app/(lib)/getAllMarkdowns";
 import markdownList from "@/app/(models)/markdownListSchema";
 import defaultWelcomeMarkdownData from "./default-welcome-markdown/defaultWelcomeMarkdownData";
 import { getServerSession } from "next-auth";

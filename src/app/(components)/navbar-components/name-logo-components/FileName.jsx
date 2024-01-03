@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
 import { DocumentIcon } from "../../../../../public/assets";
-import { AppBody, AppHeadingMedium } from "../../shared";
+import { AppBody } from "../../shared";
 import useGlobalContext from "@/app/context/useGlobalContext";
 import updateMarkdown from "@/app/(lib)/updateMarkdown";
 import { useRouter } from "next/navigation";

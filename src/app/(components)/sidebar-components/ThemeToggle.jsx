@@ -3,7 +3,7 @@ import { DarkModeIcon, LightModeIcon } from "../../../../public/assets";
 import { useTheme } from "next-themes";
 
 const ThemeToggle = () => {
-  const { theme, setTheme, resolvedTheme } = useTheme();
+  const { setTheme, resolvedTheme } = useTheme();
   //
   return (
     <div className="flex justify-start items-center gap-3 mt-4">

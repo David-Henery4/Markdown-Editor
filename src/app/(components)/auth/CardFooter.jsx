@@ -6,7 +6,6 @@ import {CredentialsSignIn, DemoSignIn, OrSeperator, ProvidersSignIn} from "@/app
 
 const CardFooter = async () => {
   const providers = await getProviders(options)
-  // console.log(providers)
   const session = await getServerSession()
   const csrfToken = await getCsrfToken();
   //

@@ -6,8 +6,6 @@ import TextareaAutosize from 'react-textarea-autosize';
 const Markdown = ({
   isPreviewActive,
   setIsPreviewActive,
-  currentMarkdownContent,
-  setCurrentMarkdownContent,
 }) => {
   const { activeMdData, setActiveMdData } = useGlobalContext();
   //
@@ -26,10 +24,6 @@ const Markdown = ({
           />
         </div>
       </div>
-      {/* Can make content server component by passing in as children (But is there any point/benefit) */}
-      {/* <div> */}
-      {/* </div> */}
-      {/* <textarea></textarea> */}
       <TextareaAutosize
         name="markdown-text"
         id="markdown-text"

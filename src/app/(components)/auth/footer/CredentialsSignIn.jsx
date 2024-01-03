@@ -1,6 +1,6 @@
 "use client";
 import { useState } from "react";
-import { useSession, signIn } from "next-auth/react";
+import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import createUser from "@/app/(lib)/createUser";
 import {
@@ -13,7 +13,6 @@ import {
 
 const CredentialsSignIn = ({ csrfToken }) => {
   const router = useRouter();
-  const {status} = useSession()
   //
   const [isSignUp, setIsSignUp] = useState(false);
   const [isLoading, setIsloading] = useState(false);

@@ -13,20 +13,16 @@ const MarkdownAndPreviewContainer = ({ allCurrentMarkdowns }) => {
   //
   return (
     <section className="grid grid-cols-markdownPreviewContainer">
-      {/* Could try make these re-usable */}
       {/* Markdown */}
       <Markdown
         isPreviewActive={isPreviewActive}
         setIsPreviewActive={setIsPreviewActive}
-        // currentMarkdownContent={currentMarkdownContent}
-        // setCurrentMarkdownContent={setCurrentMarkdownContent}
       />
 
       {/* Preview */}
       <Preview
         isPreviewActive={isPreviewActive}
         setIsPreviewActive={setIsPreviewActive}
-        // currentMarkdownContent={currentMarkdownContent}
       />
     </section>
   );

@@ -1,12 +1,8 @@
 "use client";
-import { AppHeadingSmall } from "./shared";
-import { LogoIcon } from "../../../public/assets";
 import useGlobalContext from "@/app/context/useGlobalContext";
 import {
   ThemeToggle,
   SignOut,
-  MarkDownFileList,
-  AddNewMarkdownBtn,
 } from "./sidebar-components";
 
 const Sidebar = ({ children, user }) => {
