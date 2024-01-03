@@ -3,9 +3,12 @@ import createMarkdown from "@/app/(lib)/createMarkdown";
 import { useRouter } from "next/navigation";
 import { useState, useEffect } from "react";
 import { useSession } from "next-auth/react";
+import useGlobalContext from "@/app/context/useGlobalContext";
 
 const AddNewMarkdownBtn = () => {
   const { data } = useSession();
+  const { handleSetActiveMarkdownIndex } = useGlobalContext();
+  const { refresh } = useRouter();
   //
   const [newMarkdown, setNewMarkdown] = useState({
     id: self.crypto.randomUUID(),
@@ -18,7 +21,6 @@ const AddNewMarkdownBtn = () => {
     name: "untitled-document.md",
     content: "",
   });
-  const { refresh } = useRouter();
   //
   const handleCreateNewMarkdown = async (newDefaultMarkdown) => {
     setNewMarkdown((oldValues) => {
@@ -30,6 +32,7 @@ const AddNewMarkdownBtn = () => {
     const res = await createMarkdown(newDefaultMarkdown);
     console.log(res);
     refresh();
+    handleSetActiveMarkdownIndex(0)
   };
   //
   useEffect(() => {

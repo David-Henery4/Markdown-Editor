@@ -10,9 +10,9 @@ const DeleteBtn = ({ setIsDropdownOpen }) => {
   //
   const handleDeleteMarkdown = async () => {
     const res = await deleteMarkdown(activeMdData?.id);
-    handleSetActiveMarkdownIndex(0);
     setIsDropdownOpen(false)
     refresh();
+    handleSetActiveMarkdownIndex(0);
     console.log(res);
   };
   //

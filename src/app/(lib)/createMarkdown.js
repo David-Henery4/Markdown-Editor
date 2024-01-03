@@ -2,7 +2,7 @@
 const createMarkdown = async (newMarkdowndata) => {
   try {
     const res = await fetch(
-      "https://markdown-editor-md.vercel.app/api/markdown",
+      "/api/markdown",
       {
         method: "POST",
         headers: {

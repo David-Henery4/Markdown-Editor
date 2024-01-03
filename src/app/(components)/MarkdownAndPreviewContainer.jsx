@@ -8,8 +8,8 @@ const MarkdownAndPreviewContainer = ({ allCurrentMarkdowns }) => {
   const [isPreviewActive, setIsPreviewActive] = useState(false);
   //
   useEffect(() => {
-    setActiveMdData(allCurrentMarkdowns[activeMd])
-  }, [activeMd])
+    setActiveMdData(allCurrentMarkdowns[activeMd]);
+  }, [activeMd, allCurrentMarkdowns?.length]);
   //
   return (
     <section className="grid grid-cols-markdownPreviewContainer">

@@ -1,7 +1,7 @@
 const updateMarkdown = async (id, updatedData) => {
   try {
     const res = await fetch(
-      `https://markdown-editor-md.vercel.app/api/markdown/${id}`,
+      `/api/markdown/${id}`,
       {
         method: "PUT",
         body: JSON.stringify({
