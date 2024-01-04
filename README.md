@@ -1,6 +1,4 @@
-# Frontend Mentor - In-browser markdown editor solution
-
-This is a solution to the [In-browser markdown editor challenge on Frontend Mentor](https://www.frontendmentor.io/challenges/inbrowser-markdown-editor-r16TrrQX9). Frontend Mentor challenges help you improve your coding skills by building realistic projects. 
+# Markdown - In-browser markdown editor 
 
 ## Table of contents
 
@@ -14,9 +12,7 @@ This is a solution to the [In-browser markdown editor challenge on Frontend Ment
   - [Continued development](#continued-development)
   - [Useful resources](#useful-resources)
 - [Author](#author)
-- [Acknowledgments](#acknowledgments)
 
-**Note: Delete this note and update the table of contents based on what sections you keep.**
 
 ## Overview
 
@@ -30,25 +26,18 @@ Users should be able to:
 - View a full-page preview of the formatted content
 - View the optimal layout for the app depending on their device's screen size
 - See hover states for all interactive elements on the page
-- **Bonus**: If you're building a purely front-end project, use localStorage to save the current state in the browser that persists when the browser is refreshed
 - **Bonus**: Build this project as a full-stack application
 
 ### Screenshot
 
-![](./screenshot.jpg)
-
-Add a screenshot of your solution. The easiest way to do this is to use Firefox to view your project, right-click the page and select "Take a Screenshot". You can choose either a full-height screenshot or a cropped one based on how long the page is. If it's very long, it might be best to crop it.
-
-Alternatively, you can use a tool like [FireShot](https://getfireshot.com/) to take the screenshot. FireShot has a free option, so you don't need to purchase it. 
-
-Then crop/optimize/edit your image however you like, add it to your project, and update the file path in the image above.
-
-**Note: Delete this note and the paragraphs above when you add your screenshot. If you prefer not to add a screenshot, feel free to remove this entire section.**
+![The home page, showing an example of a markdown file, in the editor, being previewed.](/public/screenshot/screenshot.png)
 
 ### Links
 
+(Solution url to be added)
 - Solution URL: [Add solution URL here](https://your-solution-url.com)
-- Live Site URL: [Add live site URL here](https://your-live-site-url.com)
+
+- Live Site URL: [markdown-editor-md.vercel.app](https://markdown-editor-md.vercel.app)
 
 ## My process
 
@@ -61,57 +50,246 @@ Then crop/optimize/edit your image however you like, add it to your project, and
 - Mobile-first workflow
 - [React](https://reactjs.org/) - JS library
 - [Next.js](https://nextjs.org/) - React framework
-- [Styled Components](https://styled-components.com/) - For styles
+- [TailwindCSS](https://styled-components.com/) - For styles
+- [MongoDB](https://www.mongodb.com) - Database
+- [Mongoose](https://mongoosejs.com) - MongoDB Library
+- [Next-Auth](https://next-auth.js.org) - Next.js Authentication/Authorization  
+- [Puppeteer](https://pptr.dev/) - Node.js headless browser library
+- [react-markdown](https://github.com/remarkjs/react-markdown) Render markdown text to html/react component package
+- [Next-Themes](https://www.npmjs.com/package/next-themes) - Next theme package
 
-**Note: These are just examples. Delete this note and replace the list above with your own choices**
+## What I learned
 
-### What I learned
+### Next-auth:
 
-Use this section to recap over some of your major learnings while working through this project. Writing these out and providing code samples of areas you want to highlight is a great way to reinforce your own knowledge.
+This project lead me to learning about a few different technologies and concepts I hadn't been aware of before. Some I didn't even end up using in this project, but they are still some things I would like to use and learn more about in the future.
 
-To see how you can add code snippets, see below:
+To start with, this is only the second project I have used Next-Auth, and the whole concept and how to use is becoming a lot clearer to me now and because of this, I had a lot simpler time setting it up as I had done previously.
+For instance, when setting up the credentials provider I had to set the schema of what credentials to sign-in with (We could of also set up an email sign-in credentials) and then, in combination with mongoDB, find the user in the database and sign them in.   
 
-```html
-<h1>Some HTML code I'm proud of</h1>
-```
-```css
-.proud-of-this-css {
-  color: papayawhip;
-}
-```
 ```js
-const proudOfThisFunc = () => {
-  console.log('🎉')
+CredentialsProvider({
+      name: "Credentials",
+      credentials: {
+        username: {
+          label: "username",
+          type: "text",
+          placeholder: "Your-username",
+        },
+        password: {
+          label: "password",
+          type: "password",
+          placeholder: "Your-password",
+        },
+      },
+      async authorize(credentials) {
+        try {
+          const foundUser = await User.findOne({
+            username: credentials.username,
+          })
+            .lean()
+            .exec();
+          //
+          if (foundUser) {
+            const match = await bcrypt.compare(
+              credentials.password,
+              foundUser.password
+            );
+            //
+            if (match) {
+              delete foundUser.password;
+              foundUser["role"] = "unverifed Email User";
+              return { ...foundUser };
+            }
+          }
+        } catch (error) {
+          console.log(error);
+        }
+        // null = If user isn't found
+        return null;
+      },
+    }),
+```
+
+I also learned, with next-auth, how to apply properties to the users tokens when signing in, this is especially useful when applying role based privating routing in your application.  For instance, seeing if someone is a verified email user, to seeing if a user is classed as an admin user. We can then apply logic to define what routes different types of users can access, based on their defined roles.
+
+Heres the basic syntax of how we did that, providing a token that can be access in client components & server ones:
+
+```js
+async jwt({ token, user, session }) {
+      if (user) {
+        return {
+          ...token,
+          id: user._id || user.id,
+          username: user.username || user.name,
+          role: user.role,
+        };
+      }
+      return token;
+    },
+    // (Client Side)
+    async session({ session, token, user }) {
+      return {
+        ...session.user,
+        id: token.id,
+        username: token.username,
+        role: token.role,
+      };
+    },
+```
+
+### Creating a PDF export:
+
+When I was researching on how to implement this feature, I find a lot of different ways of making it. This lead me to finding 3 mains concepts in which it could be done, all using different types of libraries:
+
+- I first found libraries like **jsPDF-html2canvas & html2pdf.js**. These libraries let us screenshot the part of the html content we want and then essentially stamped that screenshot to a pdf. This way wasn't ideal because although it was a pdf, it just a screenshot of the content and not the actual text content itself, so I decided not to use this technique. On top of that, the pdf of the screenshot wasn't great quality and was stretched.
+
+- I tried using a few different libraries like **jspdf, @react-pdf/renderer & react-pdf-html**. These allowed me to generate pdfs on the client, but I had few problems using them for this project and I decided against using them but I feel they could be useful for future projects when needed. The reasons I didn't use them for this project was because the styling wasn't great, they sometimes ignore certain CSS properties and the CSS stlyesheet was also tricky to apply to the pdfs, also they had trouble rendering some html elements like the checkbox input which couldn't be rendered on the PDF. Although the main was reason I didn't use these libraries was because they seemed to be best used when the html content was a set template and wasn't dyanmic like a invoice, receipt or event ticket, where the layout and the stlyes don't change. For this project however, I needed something that could generate PDFs with dynamic html and styles.
+
+- The technology I chose in the end was to use a library called **puppetter**. Puppeteer is a powerful library, that I learned, can be used for many different things like generating PDFs, automate certain different taks like form submissons, testing and more. It can do this because puppetter launchess a headless browser and performs those actions on there.
+
+#### Puppeteer
+
+Puppeteer allowed me to generate the PDF on the backend, using the dynamic html content and styles that had been sent through by an API. Although I found this way to be the easier and more efficient way to generate PDFs, I did have a few problems using it when deploying with vercel. The reason being because puppeteer needs to install and run a headless browser in order to work, it couldn't do this in vercel because of their limitations when hosting.
+
+This lead me to searching for a variety of different solutions, the first solution I found was to deploy the project on render, instead of vercel and use docker and a dockerfile with the deployment. This was my first time learning about docker, and from what I understand, allows you to create a local setup and application inside a container/enviroment, which then can used almost anywhere without the usual hosting limits or enviroment contraints. Sort of like setting up an application on a virtual local machine and can then be tranfered to be used anywhere and run off of that virtual local machine. However I decided not to use this solution because I feel the time needed to learn docker properly was beyond the scope of this project and I had already had the project deployed on vercel at the time, which doesn't allow the project to be deployed with docker.
+
+Although by researching about docker and it's use cases, it has definitely peaked my curiosity and is something I will be learning how to use in the future. Also the prospect of using docker and puppeteer to build powerful applications is an exciting one for me, and something I will be exploring.
+
+The solution I chose in the end was to use browserless, which is a service that lets us use and host a headless browers for us, instead of deploying a headless browser oursleves on the hosting server (vercel in our case). This was the main problem that I was having on vercel and by using browserless I was able to overcome that problem and deploy the project with puppeteer to generate the PDF on vercel.
+
+
+#### Heres the syntax of setting up the PDF genration:
+
+**The back end API route**
+```js
+  import { NextResponse } from "next/server";
+import puppeteer from "puppeteer-core";
+
+export async function POST(req) {
+  try {
+    const { htmlContent, currentStyles } = await req.json();
+    // 
+    const brows = await puppeteer.connect({
+      browserWSEndpoint: `wss://chrome.browserless.io?token=${process.env.BLESS_TOKEN}`,
+    });
+    //
+    const page = await brows.newPage();
+    //
+    const htmlContentAndStyles = `<style>@import url(https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@300;400;500;600;700;800&display=swap); @import url(https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Roboto+Slab:wght@300;400;500;600;700;800&display=swap); ${currentStyles} </style>${htmlContent}`;
+    //
+    await page.setContent(htmlContentAndStyles, { waitUntil: "networkidle0" });
+    //
+    const pdfBuffer = await page.pdf({ format: "A4", printBackground: true });
+    //
+    await brows.close();
+    //
+    return new NextResponse(pdfBuffer, {
+      status: 200,
+      headers: {
+        "Content-Type": "application/pdf",
+        "Content-Disposition": "attachment; filename=generated.pdf",
+      },
+    });
+  } catch (error) {
+    console.log("error", error);
+    return NextResponse.json(
+      { msg: "Error creating PDF", error },
+      { status: 400 }
+    );
+  }
 }
 ```
 
-If you want more help with writing markdown, we'd recommend checking out [The Markdown Guide](https://www.markdownguide.org/) to learn more.
+<br>
+<br>
 
-**Note: Delete this note and the content within this section and replace with your own learnings.**
+**The frontend export PDF button**
+```js
+import { DownloadPDFIcon } from "../../../../../../public/assets";
+import { useTheme } from "next-themes";
+import pdfStyles from "@/app/(pdf)/pdfStyles";
 
-### Continued development
+const DownloadPdf = ({ setIsDropdownOpen }) => {
+  const { resolvedTheme } = useTheme();
+  //
+  const handlePDFCall = async () => {
+    //
+    const markdownPreviewHtml =
+      document.getElementById("markdown-preview").innerHTML;
+    //
+    setIsDropdownOpen(false);
+    //
+    try {
+      const res = await fetch("/api/pdf", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          htmlContent: markdownPreviewHtml,
+          currentStyles: pdfStyles(resolvedTheme),
+        }),
+      });
+      //
+      if (res.ok) {
+        // Handle successful response
+        console.log("PDF generation request successful");
+        // Create a Blob from the response data
+        const pdfBlob = await res.blob();
+        // Create a link element to trigger the download
+        const link = document.createElement("a");
+        link.href = URL.createObjectURL(pdfBlob);
+        link.download = "generated.pdf";
+        // Trigger the download
+        link.click();
+        // Clean up the URL.createObjectURL
+        URL.revokeObjectURL(link.href);
+      } else {
+        // Handle error response
+        console.error("PDF generation request failed");
+      }
+    } catch (error) {
+      console.error("An error occurred:", error);
+      console.log("An error occurred:", error);
+    }
+  };
+  //
+  return (
+    <li
+      className="w-full flex flex-col-reverse gap-2 justify-between items-center smTablet:gap-12 smTablet:flex-row group hover:cursor-pointer"
+      onClick={handlePDFCall}
+    >
+      <p className="w-max text-white group-hover:text-orange">
+        Download as PDF
+      </p>
+      <button>
+        <DownloadPDFIcon className="fill-white group-hover:fill-orange" />
+      </button>
+    </li>
+  );
+};
 
-Use this section to outline areas that you want to continue focusing on in future projects. These could be concepts you're still not completely comfortable with or techniques you found useful that you want to refine and perfect.
+export default DownloadPdf;
+```
 
-**Note: Delete this note and the content within this section and replace with your own plans for continued development.**
+
+## Continued development
+
+Even though I didn't use it in this project, I did learn about docker, which would of allowed me to set up a puppeteer project in a local enviroment/container. This would of allowed me to set up a more robust application with puppeteer, without any overhead or limitations from any host enviroments.
+
+This really intrested me when I was learning about it, and I will, in the future be learning more about it, and will want to build different projects using it, as it seems like a fun and powerfull technology to use.
 
 ### Useful resources
 
-- [Example resource 1](https://www.example.com) - This helped me for XYZ reason. I really liked this pattern and will use it going forward.
-- [Example resource 2](https://www.example.com) - This is an amazing article which helped me finally understand XYZ. I'd recommend it to anyone still learning this concept.
+- [browserless blog post](https://www.browserless.io/blog/2023/03/21/puppeteer-vercel) - This blog post on the browserless.io website showed me how to use puppeteer on vercel, which without this, wouldn't of worked when depolying with vercel becasue of the need to run a headless browser in order to generate the pdf export. The solution wasn't perfect, but it allowed me to get it working.
 
-**Note: Delete this note and replace the list above with resources that helped you during the challenge. These could come in handy for anyone viewing your solution or for yourself when you look back on this project in the future.**
+- [Puppeteer Docs](https://pptr.dev) - This is the puppeteer docs, this allowed me to learn how to use it, and what other things it can be used for.
 
 ## Author
 
-- Website - [Add your name here](https://www.your-site.com)
-- Frontend Mentor - [@yourusername](https://www.frontendmentor.io/profile/yourusername)
-- Twitter - [@yourusername](https://www.twitter.com/yourusername)
+- Website - [www.djhwebdevelopment.com](https://www.djhwebdevelopment.com)
+- Frontend Mentor - [@David-Henery4](https://www.frontendmentor.io/profile/David-Henery4)
+- linkedIn - [David Henery](https://www.linkedin.com/in/david-henery-725458241)
 
-**Note: Delete this note and add/remove/edit lines above based on what links you'd like to share.**
 
-## Acknowledgments
-
-This is where you can give a hat tip to anyone who helped you out on this project. Perhaps you worked in a team or got some inspiration from someone else's solution. This is the perfect place to give them some credit.
-
-**Note: Delete this note and edit this section's content as necessary. If you completed this challenge by yourself, feel free to delete this section entirely.**

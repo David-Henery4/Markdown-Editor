@@ -18,7 +18,7 @@ const FileName = () => {
   }
   //
   return (
-    <div className="flex justify-start items-center gap-4">
+    <div className="flex justify-start items-center gap-4 tablet:flex-1">
       <DocumentIcon />
       <div className="flex-1">
         <div className="hidden text-darkGrey smTablet:block">
@@ -63,7 +63,7 @@ const FileName = () => {
                   return newData;
                 });
               }}
-              className={`outline-none caret-orange py-[6px] ${
+              className={`w-full bg-veryDarkBlack/0 border-b border-white outline-none caret-orange py-[6px] tablet:w-1/2 ${
                 isNameInputActive ? "block" : "hidden"
               }`}
               value={activeMdData?.name}
