@@ -10,7 +10,6 @@ const ProvidersSignIn = ({ providers }) => {
         .map((provider) => {
           const isGoogle = provider.id === "google";
           const isGitHub = provider.id === "github";
-          console.log(providers)
           return (
             <button
               key={provider.name}
